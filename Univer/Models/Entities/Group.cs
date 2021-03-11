@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Group
+    class Group : Entity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
 

@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Subject : Entity
+    abstract class Entity
     {
-        public string Name { get; set; }
-
-        public Professor Professor { get; set; }
+        public int Id { get; set; }
     }
 }

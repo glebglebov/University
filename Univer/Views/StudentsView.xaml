@@ -15,9 +15,11 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Группы" Grid.Column="0">
-            <ListBox ItemsSource="{Binding Groups}"
-                     SelectedItem="{Binding SelectedGroup}">
+        <GroupBox Header="Группы" Grid.Column="0"
+                  Style="{StaticResource StudentsView_GroupBox}">
+            <ListBox ItemsSource="{Binding GroupsList}"
+                     SelectedItem="{Binding SelectedGroup}"
+                     Style="{StaticResource StudentsView_ListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -28,8 +30,11 @@
             </ListBox>
         </GroupBox>
 
-        <GroupBox Header="Студенты" Grid.Column="1">
-            <ListBox ItemsSource="{Binding SelectedGroup.Students}">
+        <GroupBox Header="Студенты" Grid.Column="1"
+                  Style="{StaticResource StudentsView_GroupBox}">
+            <ListBox ItemsSource="{Binding SelectedGroup.Students}"
+                     SelectedItem="{Binding SelectedStudent}"
+                     Style="{StaticResource StudentsView_ListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" />
@@ -38,8 +43,15 @@
             </ListBox>
         </GroupBox>
 
-        <GroupBox Header="Студент" Grid.Column="2">
-            
+        <GroupBox Header="Студент" Grid.Column="2"
+                  Style="{StaticResource StudentsView_GroupBox}">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top">
+                    <Run Text="{Binding SelectedStudent.Surname}" />
+                    <Run Text="{Binding SelectedStudent.Name}" />
+                    <Run Text="{Binding SelectedStudent.Patronymic}" />
+                </TextBlock>
+            </DockPanel>
         </GroupBox>
             
     </Grid>

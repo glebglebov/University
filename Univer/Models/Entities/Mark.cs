@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Mark
+    class Mark : Entity
     {
-        public int Id { get; set; }
-
         public int Score { get; set; }
 
         public string Comment { get; set; }

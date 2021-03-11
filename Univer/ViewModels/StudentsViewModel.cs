@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Univer.Interfaces;
 using Univer.Models;
 using Univer.Models.Entities;
 
@@ -10,8 +11,15 @@ namespace Univer.ViewModels
 {
     class StudentsViewModel : BaseViewModel
     {
-        public List<Student> Students { get; set; }
-        public List<Group> Groups { get; set; }
+        private IRepository<Student> _Students;
+        private IRepository<Group> _Groups;
+
+        #region Properties
+
+        public List<Student> StudentsList { get; set; }
+        public List<Group> GroupsList { get; set; }
+
+        #region Property - Selected Group
 
         private Group _SelectedGroup;
         public Group SelectedGroup
@@ -24,42 +32,32 @@ namespace Univer.ViewModels
             }
         }
 
-        public StudentsViewModel(List<Group> Groups)
+        #endregion
+
+        #region Property - Selected Student
+
+        private Student _SelectedStudent;
+        public Student SelectedStudent
         {
-            //this.Students = Students;
-            this.Groups = Groups;
+            get => _SelectedStudent;
+            set
+            {
+                _SelectedStudent = value;
+                OnProperyChanged();
+            }
+        }
 
-            //using (var db = new StudentsContext(options))
-            //{
-                //var group1 = new Group()
-                //{
-                //    Name = "АААА-01-01"
-                //};
+        #endregion
 
-                //db.Groups.Add(group1);
+        #endregion
 
-                //var stud1 = new Student()
-                //{
-                //    Name = "Глеб",
-                //    Surname = "Шалимов",
-                //    Birthday = DateTime.Now,
-                //    Group = group1
-                //};
+        public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups)
+        {
+            _Students = Students;
+            _Groups = Groups;
 
-                //var stud2 = new Student()
-                //{
-                //    Name = "Глеб",
-                //    Surname = "Глебов",
-                //    Birthday = DateTime.Now,
-                //    Group = group1
-                //};
-
-                //db.Students.Add(stud1);
-                //db.Students.Add(stud2);
-
-                //db.SaveChanges();
-
-            //}
+            StudentsList = _Students.GetList.ToList();
+            GroupsList = _Groups.GetList.ToList();
         }
     }
 }

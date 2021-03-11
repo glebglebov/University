@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    abstract class Person
+    abstract class Person : Entity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
