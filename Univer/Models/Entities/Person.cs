@@ -4,13 +4,16 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Group
+    abstract class Person
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
+        public string Surname { get; set; }
 
-        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+        public string Patronymic { get; set; }
+
+        public DateTime Birthday { get; set; }
     }
 }

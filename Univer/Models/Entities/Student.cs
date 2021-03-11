@@ -4,18 +4,10 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Student
+    class Student : Person
     {
-        public int Id { get; set; }
+        public virtual Group Group { get; set; }
 
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
-
-        public string Patronymic { get; set; }
-
-        public DateTime Birthday { get; set; }
-
-        public Group Group { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; }
     }
 }

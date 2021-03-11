@@ -16,13 +16,26 @@
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Группы" Grid.Column="0">
-            <ListBox ItemsSource="{Binding Test}">
-                
+            <ListBox ItemsSource="{Binding Groups}"
+                     SelectedItem="{Binding SelectedGroup}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </GroupBox>
 
         <GroupBox Header="Студенты" Grid.Column="1">
-            
+            <ListBox ItemsSource="{Binding SelectedGroup.Students}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </GroupBox>
 
         <GroupBox Header="Студент" Grid.Column="2">
