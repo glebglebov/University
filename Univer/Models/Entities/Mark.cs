@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Mark : Entity
+    public class Mark : Entity
     {
         public int Score { get; set; }
 

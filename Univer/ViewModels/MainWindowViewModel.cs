@@ -13,15 +13,19 @@ namespace Univer.ViewModels
     {
         private IRepository<Student> _Students;
         private IRepository<Group> _Groups;
+        private IRepository<Mark> _Marks;
+        private IRepository<Subject> _Subjects;
 
         public BaseViewModel ActiveViewModel { get; set; }
 
         public MainWindowViewModel()
         {
-            _Students = new DbRepository<Student>();
-            _Groups = new GroupsRepository();
+            _Students = new StudentsRepository(App.Db);
+            _Groups = new DbRepository<Group>(App.Db);
+            _Marks = new MarksRepository(App.Db);
+            _Subjects = new DbRepository<Subject>(App.Db);
 
-            ActiveViewModel = new StudentsViewModel(_Students, _Groups);
+            ActiveViewModel = new StudentsViewModel(_Students, _Groups, _Marks);
         }
     }
 }

@@ -13,11 +13,13 @@ namespace Univer.ViewModels
     {
         private IRepository<Student> _Students;
         private IRepository<Group> _Groups;
+        private IRepository<Mark> _Marks;
 
         #region Properties
 
-        public List<Student> StudentsList { get; set; }
         public List<Group> GroupsList { get; set; }
+        public List<Mark> MarksList { get; set; }
+        public List<Student> StudentsList { get; set; }
 
         #region Property - Selected Group
 
@@ -51,13 +53,15 @@ namespace Univer.ViewModels
 
         #endregion
 
-        public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups)
+        public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
         {
             _Students = Students;
             _Groups = Groups;
+            _Marks = Marks;
 
-            StudentsList = _Students.GetList.ToList();
             GroupsList = _Groups.GetList.ToList();
+            StudentsList = _Students.GetList.ToList();
+            MarksList = _Marks.GetList.ToList();
         }
     }
 }

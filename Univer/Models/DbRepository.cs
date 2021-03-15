@@ -14,15 +14,9 @@ namespace Univer.Models
         private StudentsContext _db;
         private DbSet<T> _set;
 
-        public DbRepository()
+        public DbRepository(StudentsContext context)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<StudentsContext>();
-
-            var options = optionsBuilder
-                    .UseSqlServer(@"Server=localhost\MSSQLSERVER01;Database=University;Trusted_Connection=True;")
-                    .Options;
-
-            _db = new StudentsContext(options);
+            _db = context;
             _set = _db.Set<T>();
         }
 

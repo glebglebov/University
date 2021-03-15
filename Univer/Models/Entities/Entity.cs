@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univer.Models.Entities
+﻿namespace Univer.Models.Entities
 {
-    abstract class Entity
+    public abstract class Entity
     {
         public int Id { get; set; }
     }

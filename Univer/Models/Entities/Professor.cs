@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Professor : Person
+    public class Professor : Person
     {
         public string Degree { get; set; }
 

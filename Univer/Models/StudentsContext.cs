@@ -3,7 +3,7 @@ using Univer.Models.Entities;
 
 namespace Univer.Models
 {
-    class StudentsContext : DbContext
+    public class StudentsContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
 

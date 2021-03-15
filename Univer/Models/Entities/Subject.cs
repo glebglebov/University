@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Univer.Models.Entities
+﻿namespace Univer.Models.Entities
 {
-    class Subject : Entity
+    public class Subject : Entity
     {
         public string Name { get; set; }
 

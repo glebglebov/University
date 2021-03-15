@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Group : Entity
+    public class Group : Entity
     {
         public string Name { get; set; }
 

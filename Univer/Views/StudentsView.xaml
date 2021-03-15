@@ -51,6 +51,13 @@
                     <Run Text="{Binding SelectedStudent.Name}" />
                     <Run Text="{Binding SelectedStudent.Patronymic}" />
                 </TextBlock>
+                <DataGrid ItemsSource="{Binding SelectedStudent.Marks}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Наименование дисциплины" Binding="{Binding Subject.Name}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Балл" Binding="{Binding Score}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Оценка" Binding="{Binding Comment}" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </DockPanel>
         </GroupBox>
             

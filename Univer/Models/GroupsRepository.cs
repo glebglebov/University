@@ -11,7 +11,7 @@ namespace Univer.Models
     {
         public override IQueryable<Group> GetList => base.GetList.Include(item => item.Students);
 
-        public GroupsRepository() : base()
+        public GroupsRepository(StudentsContext context) : base(context)
         {
 
         }

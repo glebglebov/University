@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Univer.Models.Entities
 {
-    class Student : Person
+    public class Student : Person
     {
         public virtual Group Group { get; set; }
 
-        public virtual ICollection<Mark> Marks { get; set; }
+        public virtual ICollection<Mark> Marks { get; set; } = new List<Mark>();
     }
 }
