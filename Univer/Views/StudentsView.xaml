@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance vm:StudentsViewModel}"
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="White">
+             Background="#E7EAD6">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -51,7 +51,10 @@
                     <Run Text="{Binding SelectedStudent.Name}" />
                     <Run Text="{Binding SelectedStudent.Patronymic}" />
                 </TextBlock>
-                <DataGrid ItemsSource="{Binding SelectedStudent.Marks}" AutoGenerateColumns="False">
+                <DataGrid ItemsSource="{Binding SelectedStudent.Marks}"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserResizeRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Наименование дисциплины" Binding="{Binding Subject.Name}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Балл" Binding="{Binding Score}" IsReadOnly="True" />
