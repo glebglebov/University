@@ -1,17 +1,52 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style TargetType="Menu" x:Key="MainMenu">
+        <Setter Property="Background" Value="#E7EAD7" />
+        <Style.Resources>
+            <Style TargetType="MenuItem">
+                <Setter Property="Foreground" Value="#363A2C" />
+                <Setter Property="Padding" Value="4,6"/>
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="MenuItem">
+                            <Border Name="_Border"
+                                    Padding="6"
+                                    BorderThickness="0"
+                                    BorderBrush="Transparent"
+                                    SnapsToDevicePixels="true">
+                                <ContentPresenter ContentSource="Header" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="_Border" Property="Background" Value="#D8DCBC"/>
+                                    <Setter Property="Cursor" Value="Hand" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="Border" x:Key="MainWrap">
+        
+    </Style>
+
     <Style TargetType="ListBox" x:Key="StudentsView_ListBox">
+        <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="White" />
         <Setter Property="BorderBrush" Value="#C8CEA1" />
         <Setter Property="BorderThickness" Value="0.6" />
-        <Setter Property="Padding" Value="0" />
         <Style.Resources>
             <Style TargetType="ListBoxItem">
                 <Style.Setters>
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="Foreground" Value="#363A2C" />
                     <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontSize" Value="14" />
                     <Setter Property="Margin" Value="0" />
                     <Setter Property="Template">
                         <Setter.Value>
@@ -51,6 +86,36 @@
         <Setter Property="Margin" Value="7" />
         <Setter Property="BorderBrush" Value="#8B9474" />
         <Setter Property="Foreground" Value="#8B9474" />
+    </Style>
+
+    <Style TargetType="Border" x:Key="StudentsView_Student">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="#C8CEA1" />
+        <Setter Property="BorderThickness" Value="0.6" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Style.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#363A2C" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="DataGrid" x:Key="StudentsView_Table">
+        <Setter Property="GridLinesVisibility" Value="Vertical" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="AlternatingRowBackground" Value="#E7EAD7" />
+        <Setter Property="BorderBrush" Value="#C8CEA1" />
+        <Setter Property="BorderThickness" Value="0.6" />
+
+        <Style.Resources>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Height" Value="20" />
+            </Style>
+        </Style.Resources>
     </Style>
 
 </ResourceDictionary>

@@ -6,13 +6,12 @@
              xmlns:vm="clr-namespace:Univer.ViewModels"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance vm:StudentsViewModel}"
-             d:DesignHeight="450" d:DesignWidth="800"
-             Background="#E7EAD6">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Группы" Grid.Column="0"
@@ -37,7 +36,10 @@
                      Style="{StaticResource StudentsView_ListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock>
+                            <Run Text="{Binding Surname}" />
+                            <Run Text="{Binding Name}" />
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -45,23 +47,30 @@
 
         <GroupBox Header="Студент" Grid.Column="2"
                   Style="{StaticResource StudentsView_GroupBox}">
-            <DockPanel>
-                <TextBlock DockPanel.Dock="Top">
-                    <Run Text="{Binding SelectedStudent.Surname}" />
-                    <Run Text="{Binding SelectedStudent.Name}" />
-                    <Run Text="{Binding SelectedStudent.Patronymic}" />
-                </TextBlock>
+            
+                <DockPanel>
+                    <Border Style="{StaticResource StudentsView_Student}"
+                            DockPanel.Dock="Top">
+                        <StackPanel>
+                            <TextBlock Text="{Binding SelectedStudent.Surname}" />
+                            <TextBlock Text="{Binding SelectedStudent.Name}" />
+                            <TextBlock Text="{Binding SelectedStudent.Patronymic}" />
+                        </StackPanel>
+                    </Border>
                 <DataGrid ItemsSource="{Binding SelectedStudent.Marks}"
+                          DockPanel.Dock="Bottom"
+                          Style="{StaticResource StudentsView_Table}"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           CanUserResizeRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Наименование дисциплины" Binding="{Binding Subject.Name}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Балл" Binding="{Binding Score}" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Оценка" Binding="{Binding Comment}" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </DockPanel>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Наименование дисциплины" Binding="{Binding Subject.Name}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Балл" Binding="{Binding Score}" IsReadOnly="True" />
+                            <DataGridTextColumn Header="Оценка" Binding="{Binding Comment}" IsReadOnly="True" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            
         </GroupBox>
             
     </Grid>

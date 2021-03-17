@@ -3,13 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Univer"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
         Title="{Binding Title}"
-        Height="450" Width="800">
-    <Grid>
+        Height="600" Width="900"
+        Background="#FCF9ED">
 
-        <ContentControl Content="{Binding ActiveViewModel}" />
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <Menu IsMainMenu="True" Style="{StaticResource MainMenu}">
+                <MenuItem Header="Обозреватель" />
+                <MenuItem Header="Преподаватели" />
+            </Menu>
+            <Border Background="#C8CEA1" Height="1" />
+        </StackPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="40*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource MainWrap}"
+                    Grid.Column="1"
+                    Grid.Row="1">
+                <ContentControl Content="{Binding ActiveViewModel}" />
+            </Border>
+        </Grid>
+    </DockPanel>
 </Window>
