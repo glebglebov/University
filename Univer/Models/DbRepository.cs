@@ -32,18 +32,22 @@ namespace Univer.Models
             if (item is null) throw new ArgumentNullException(nameof(item));
 
             _db.Entry(item).State = EntityState.Added;
+
+            _db.SaveChanges();
         }
 
         public void Update(T item)
         {
-            if (item is null) throw new ArgumentNullException(nameof(item));
-
             _db.Entry(item).State = EntityState.Modified;
+
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
             throw new NotImplementedException();
+
+            _db.SaveChanges();
         }
 
         public void Save()

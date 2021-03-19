@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
+using Univer.Commands;
 using Univer.Interfaces;
 using Univer.Models;
 using Univer.Models.Entities;
@@ -11,6 +13,8 @@ namespace Univer.ViewModels
 {
     class StudentsViewModel : BaseViewModel
     {
+        private IUserDialog _GroupEditDialog;
+
         private IRepository<Student> _Students;
         private IRepository<Group> _Groups;
         private IRepository<Mark> _Marks;
@@ -53,6 +57,20 @@ namespace Univer.ViewModels
 
         #endregion
 
+        public ICommand GroupEditCommand { get; }
+
+        private bool CanGroupEditExecute(object p) => p is Group;
+
+        private void GroupEdit(object p)
+        {
+            var group = (Group)p;
+            if (!_GroupEditDialog.Edit(group))
+                return;
+
+            _Groups.Update(group);
+
+        }
+
         public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
         {
             _Students = Students;
@@ -62,6 +80,9 @@ namespace Univer.ViewModels
             GroupsList = _Groups.GetList.ToList();
             StudentsList = _Students.GetList.ToList();
             MarksList = _Marks.GetList.ToList();
+
+            GroupEditCommand = new RelayCommand(GroupEdit, CanGroupEditExecute);
+            _GroupEditDialog = new GroupEditUserDialog(); 
         }
     }
 }

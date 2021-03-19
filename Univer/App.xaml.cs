@@ -13,10 +13,18 @@ namespace Univer
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         private static StudentsContext _db;
         public static StudentsContext Db => _db;
+
+        public static Window ActiveWindow
+            => Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+
+        public static Window FocusedWindow
+            => Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsFocused);
+
+        public static Window CurrentWindow => FocusedWindow ?? ActiveWindow;
 
         public App()
         {
