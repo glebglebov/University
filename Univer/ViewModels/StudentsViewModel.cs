@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
@@ -19,9 +20,20 @@ namespace Univer.ViewModels
         private IRepository<Group> _Groups;
         private IRepository<Mark> _Marks;
 
+        private ObservableCollection<Group> _GroupsList;
+
         #region Properties
 
-        public List<Group> GroupsList { get; set; }
+        public ObservableCollection<Group> GroupsList
+        {
+            get => _GroupsList;
+            set
+            {
+                _GroupsList = value;
+                OnProperyChanged();
+            }
+        }
+
         public List<Mark> MarksList { get; set; }
         public List<Student> StudentsList { get; set; }
 
@@ -57,6 +69,10 @@ namespace Univer.ViewModels
 
         #endregion
 
+        #region Commands
+
+        #region Command - group edit
+
         public ICommand GroupEditCommand { get; }
 
         private bool CanGroupEditExecute(object p) => p is Group;
@@ -68,8 +84,16 @@ namespace Univer.ViewModels
                 return;
 
             _Groups.Update(group);
-
+            var gr = GroupsList;
+            GroupsList = null;
+            GroupsList = gr;
         }
+
+        #endregion
+
+
+
+        #endregion
 
         public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
         {
@@ -77,7 +101,7 @@ namespace Univer.ViewModels
             _Groups = Groups;
             _Marks = Marks;
 
-            GroupsList = _Groups.GetList.ToList();
+            GroupsList = new ObservableCollection<Group>(_Groups.GetList);
             StudentsList = _Students.GetList.ToList();
             MarksList = _Marks.GetList.ToList();
 
