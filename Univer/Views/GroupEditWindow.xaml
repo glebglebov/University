@@ -1,0 +1,31 @@
+﻿<Window x:Class="Univer.Views.CreateGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Univer.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:GroupEditWindowModel}"
+        Title="{Binding Title}"
+        Background="#FCF9ED"
+        Height="300" Width="450">
+    <Border Padding="20">
+        <Border Style="{StaticResource ContentWrap}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" >
+                    <Label Content="Имя группы" />
+                    <TextBox Text="{Binding Name}" />
+                </StackPanel>
+
+                <UniformGrid DockPanel.Dock="Bottom">
+                    <Button Content="Сохранить"
+                            Command="{Binding SaveChangesCommand}"
+                            Margin="0,0,10,0" />
+                    <Button Content="Отмена"
+                            IsCancel="True"
+                            Margin="10,0,0,0" />
+                </UniformGrid>
+            </DockPanel>
+        </Border>
+    </Border>
+</Window>

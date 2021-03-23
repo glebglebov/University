@@ -84,6 +84,7 @@ namespace Univer.ViewModels
                 return;
 
             _Groups.Update(group);
+
             var gr = GroupsList;
             GroupsList = null;
             GroupsList = gr;
@@ -91,7 +92,24 @@ namespace Univer.ViewModels
 
         #endregion
 
+        #region Command - remove group
 
+        public ICommand RemoveGroupCommand { get; }
+
+        private void OnRemoveGroupCommandExecuted(object p)
+        {
+            if (!Dialog.ConfirmWarning("Вы уверены?", "Удалить группу"))
+                return;
+
+            Group group = (Group)p;
+
+            GroupsList.Remove(group);
+            _Groups.Delete(group.Id);
+        }
+
+        private bool CanRemoveGroupCommandExecute(object p) => p is Group;
+
+        #endregion
 
         #endregion
 
@@ -106,7 +124,9 @@ namespace Univer.ViewModels
             MarksList = _Marks.GetList.ToList();
 
             GroupEditCommand = new RelayCommand(GroupEdit, CanGroupEditExecute);
-            _GroupEditDialog = new GroupEditUserDialog(); 
+            RemoveGroupCommand = new RelayCommand(OnRemoveGroupCommandExecuted, CanRemoveGroupCommandExecute);
+
+            _GroupEditDialog = new Dialog(); 
         }
     }
 }

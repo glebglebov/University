@@ -9,13 +9,13 @@ using Univer.Models.Entities;
 
 namespace Univer.Models
 {
-    class GroupEditUserDialog : IUserDialog
+    class Dialog : IUserDialog
     {
         public bool Edit(Entity entity)
         {
             Group group = (Group)entity;
 
-            var viewModel = new CreateGroupWindowModel(group);
+            var viewModel = new GroupEditWindowModel(group);
             var view = new CreateGroupWindow
             {
                 DataContext = viewModel,
@@ -35,12 +35,10 @@ namespace Univer.Models
             throw new NotImplementedException();
         }
 
-        public bool ConfirmWarning(string Warning, string Caption)
-        {
-            throw new NotImplementedException();
-        }
+        public static bool ConfirmWarning(string Warning, string Caption)
+            => MessageBox.Show(Warning, Caption, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
 
-        public GroupEditUserDialog()
+        public Dialog()
         {
 
         }

@@ -45,8 +45,9 @@ namespace Univer.Models
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = _set.Local.FirstOrDefault(item => item.Id == id);
 
+            _db.Remove(item);
             _db.SaveChanges();
         }
 

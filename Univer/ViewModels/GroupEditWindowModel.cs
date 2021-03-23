@@ -8,7 +8,7 @@ using Univer.Models.Entities;
 
 namespace Univer.ViewModels
 {
-    class CreateGroupWindowModel : BaseViewModel
+    class GroupEditWindowModel : BaseViewModel
     {
         private readonly Group _Group;
 
@@ -23,23 +23,23 @@ namespace Univer.ViewModels
             }
         }
 
-        private readonly ICommand _SaveChangesCommand;
-        public ICommand SaveChangesCommand { get => _SaveChangesCommand; }
+        public ICommand SaveChangesCommand { get; }
 
         private void SaveChanges(object p)
         {
             App.CurrentWindow.DialogResult = true;
-            //App.CurrentWindow.Close();
         }
 
-        private bool CanSaveChangesExecute(object p) => true;
+        private bool CanSaveChangesExecute(object p) => Name != _Group.Name;
 
-        public CreateGroupWindowModel(Group group)
+        public GroupEditWindowModel(Group group)
         {
+            Title = "Изменить группу";
+
             _Group = group;
             _Name = _Group.Name;
 
-            _SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChangesExecute);
+            SaveChangesCommand = new RelayCommand(SaveChanges, CanSaveChangesExecute);
         }
     }
 }

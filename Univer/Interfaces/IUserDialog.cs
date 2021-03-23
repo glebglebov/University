@@ -10,7 +10,5 @@ namespace Univer.Interfaces
         bool Edit(Entity entity);
 
         bool Create(Entity entity);
-
-        bool ConfirmWarning(string Warning, string Caption);
     }
 }

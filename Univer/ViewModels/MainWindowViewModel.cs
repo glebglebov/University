@@ -20,6 +20,8 @@ namespace Univer.ViewModels
 
         public MainWindowViewModel()
         {
+            Title = "Обозреватель";
+
             _Students = new DbRepository<Student>(App.Db);
             _Groups = new DbRepository<Group>(App.Db);
             _Marks = new MarksRepository(App.Db);
