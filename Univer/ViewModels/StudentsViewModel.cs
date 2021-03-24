@@ -34,6 +34,17 @@ namespace Univer.ViewModels
             }
         }
 
+        private bool _IsStudentSelected = false;
+        public bool IsStudentSelected
+        {
+            get => _IsStudentSelected;
+            private set
+            {
+                _IsStudentSelected = (SelectedStudent != null) ? true : false;
+                OnProperyChanged();
+            }
+        }
+
         public List<Mark> MarksList { get; set; }
         public List<Student> StudentsList { get; set; }
 
@@ -61,6 +72,7 @@ namespace Univer.ViewModels
             set
             {
                 _SelectedStudent = value;
+                IsStudentSelected = true;
                 OnProperyChanged();
             }
         }

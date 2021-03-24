@@ -162,4 +162,9 @@
         </Style.Resources>
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="SmallTextBlock">
+        <Setter Property="Foreground" Value="#56504D" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
 </ResourceDictionary>

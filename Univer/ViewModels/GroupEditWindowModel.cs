@@ -30,7 +30,7 @@ namespace Univer.ViewModels
             App.CurrentWindow.DialogResult = true;
         }
 
-        private bool CanSaveChangesExecute(object p) => Name != _Group.Name;
+        private bool CanSaveChangesExecute(object p) => true;
 
         public GroupEditWindowModel(Group group)
         {
