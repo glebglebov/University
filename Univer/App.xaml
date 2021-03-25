@@ -12,6 +12,8 @@
 
             <vm:MainWindowViewModel x:Key="MainViewModel" />
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
