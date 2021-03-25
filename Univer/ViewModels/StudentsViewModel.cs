@@ -65,10 +65,12 @@ namespace Univer.ViewModels
             get => _SelectedGroup;
             set
             {
-                _SelectedGroup = value;
-                SelectedGroupStudents = new ObservableCollection<Student>(_SelectedGroup.Students);
-                SelectedGroupStudents.OrderBy(item => item.Surname);
-                OnProperyChanged();
+                if (value != null)
+                {
+                    _SelectedGroup = value;
+                    SelectedGroupStudents = new ObservableCollection<Student>(_SelectedGroup.Students);
+                    OnProperyChanged();
+                }
             }
         }
 
@@ -108,9 +110,9 @@ namespace Univer.ViewModels
 
             _Groups.Update(group);
 
-            var gr = GroupsList;
+            var tmp = GroupsList;
             GroupsList = null;
-            GroupsList = gr;
+            GroupsList = tmp;
         }
 
         #endregion
@@ -179,6 +181,25 @@ namespace Univer.ViewModels
 
         #endregion
 
+        #region Command - remove student
+
+        public ICommand RemoveStudentCommand { get; }
+
+        private void OnRemoveStudentCommandExecuted(object p)
+        {
+            if (!Dialog.ConfirmWarning("Вы уверены?", "Удалить студента"))
+                return;
+
+            var student = (Student)p;
+
+            SelectedGroupStudents.Remove(student);
+            _Students.Delete(student.Id);
+        }
+
+        private bool CanRemoveStudentExecute(object p) => p is Student;
+
+        #endregion
+
         #endregion
 
         public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
@@ -197,6 +218,7 @@ namespace Univer.ViewModels
             RemoveGroupCommand = new RelayCommand(OnRemoveGroupCommandExecuted, CanRemoveGroupCommandExecute);
             StudentEditCommand = new RelayCommand(OnStudentEditExecuted, CanStudentEditExecute);
             AddStudentCommand = new RelayCommand(OnAddStudentExecuted, CanAddStudentExecute);
+            RemoveStudentCommand = new RelayCommand(OnRemoveStudentCommandExecuted, CanRemoveStudentExecute);
 
             #endregion
         }
