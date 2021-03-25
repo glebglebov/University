@@ -191,6 +191,10 @@ namespace Univer.ViewModels
         {
             Student student = new Student
             {
+                Name = "Иван",
+                Surname = "Иванов",
+                Patronymic = "Иванович",
+                Birthday = new DateTime(2000, 1, 1),
                 Group = SelectedGroup
             };
 
