@@ -128,10 +128,19 @@ namespace Univer.ViewModels
         private void OnStudentEditExecuted(object p)
         {
             var student = (Student)p;
+            Group group = student.Group;
 
             if (!Dialog.StudentEdit(student))
                 return;
 
+            SelectedStudent = student;
+
+            if (student.Group != group)
+            {
+                var tmp = SelectedGroup;
+                SelectedGroup = null;
+                SelectedGroup = tmp;
+            }
         }
 
         private bool CanStudentEditExecute(object p) => p is Student;
@@ -146,7 +155,7 @@ namespace Univer.ViewModels
             _Groups = Groups;
             _Marks = Marks;
 
-            GroupsList = new ObservableCollection<Group>(_Groups.GetList);
+            _GroupsList = new ObservableCollection<Group>(_Groups.GetList);
             StudentsList = _Students.GetList.ToList();
             MarksList = _Marks.GetList.ToList();
 
