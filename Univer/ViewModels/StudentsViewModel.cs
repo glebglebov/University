@@ -14,8 +14,6 @@ namespace Univer.ViewModels
 {
     class StudentsViewModel : BaseViewModel
     {
-        private IUserDialog _GroupEditDialog;
-
         private IRepository<Student> _Students;
         private IRepository<Group> _Groups;
         private IRepository<Mark> _Marks;
@@ -92,7 +90,7 @@ namespace Univer.ViewModels
         private void GroupEdit(object p)
         {
             var group = (Group)p;
-            if (!_GroupEditDialog.Edit(group))
+            if (!Dialog.GroupEdit(group))
                 return;
 
             _Groups.Update(group);
@@ -123,6 +121,23 @@ namespace Univer.ViewModels
 
         #endregion
 
+        #region Command - student edit
+
+        public ICommand StudentEditCommand { get; }
+
+        private void OnStudentEditExecuted(object p)
+        {
+            var student = (Student)p;
+
+            if (!Dialog.StudentEdit(student))
+                return;
+
+        }
+
+        private bool CanStudentEditExecute(object p) => p is Student;
+
+        #endregion
+
         #endregion
 
         public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
@@ -135,10 +150,13 @@ namespace Univer.ViewModels
             StudentsList = _Students.GetList.ToList();
             MarksList = _Marks.GetList.ToList();
 
+            #region Commands initialization
+
             GroupEditCommand = new RelayCommand(GroupEdit, CanGroupEditExecute);
             RemoveGroupCommand = new RelayCommand(OnRemoveGroupCommandExecuted, CanRemoveGroupCommandExecute);
+            StudentEditCommand = new RelayCommand(OnStudentEditExecuted, CanStudentEditExecute);
 
-            _GroupEditDialog = new Dialog(); 
+            #endregion
         }
     }
 }

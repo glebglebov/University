@@ -9,12 +9,10 @@ using Univer.Models.Entities;
 
 namespace Univer.Models
 {
-    class Dialog : IUserDialog
+    class Dialog
     {
-        public bool Edit(Entity entity)
+        public static bool GroupEdit(Group group)
         {
-            Group group = (Group)entity;
-
             var viewModel = new GroupEditWindowModel(group);
             var view = new CreateGroupWindow
             {
@@ -25,7 +23,29 @@ namespace Univer.Models
             if (view.ShowDialog() != true)
                 return false;
 
-            group.Name = viewModel.Name;
+            group.Name = viewModel.Name; 
+
+            return true;
+        }
+
+        public static bool StudentEdit(Student student)
+        {
+            var viewModel = new StudentEditWindowModel(student);
+            var view = new StudentEditView
+            {
+                DataContext = viewModel
+            };
+
+            if (view.ShowDialog() != true)
+                return false;
+
+            student.Name = viewModel.Name;
+            student.Surname = viewModel.Surname;
+            student.Patronymic = viewModel.Patronymic;
+            student.Birthday = viewModel.Birthday;
+            student.Group = viewModel.Group;
+
+            App.Db.SaveChanges();
 
             return true;
         }
