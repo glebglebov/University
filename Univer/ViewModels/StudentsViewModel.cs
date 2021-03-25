@@ -167,6 +167,7 @@ namespace Univer.ViewModels
         private void OnAddStudentExecuted(object p)
         {
             Student student = new Student();
+            student.Group = SelectedGroup;
 
             if (!Dialog.StudentEdit(student))
                 return;
