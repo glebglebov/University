@@ -74,7 +74,6 @@ namespace Univer.ViewModels
         }
 
         #endregion
-
         #region Property - Selected Student
 
         private Student _SelectedStudent;
@@ -115,7 +114,6 @@ namespace Univer.ViewModels
         }
 
         #endregion
-
         #region Command - add new group
 
         public ICommand AddGroupCommand { get; }
@@ -139,7 +137,6 @@ namespace Univer.ViewModels
         private bool CanAddGroupExecute(object p) => true;
 
         #endregion
-
         #region Command - remove group
 
         public ICommand RemoveGroupCommand { get; }
@@ -158,7 +155,6 @@ namespace Univer.ViewModels
         private bool CanRemoveGroupCommandExecute(object p) => p is Group;
 
         #endregion
-
         #region Command - student edit
 
         public ICommand StudentEditCommand { get; }
@@ -182,7 +178,6 @@ namespace Univer.ViewModels
         private bool CanStudentEditExecute(object p) => p is Student;
 
         #endregion
-
         #region Command - add new student
 
         public ICommand AddStudentCommand { get; }
@@ -210,7 +205,6 @@ namespace Univer.ViewModels
         private bool CanAddStudentExecute(object p) => true;
 
         #endregion
-
         #region Command - remove student
 
         public ICommand RemoveStudentCommand { get; }
