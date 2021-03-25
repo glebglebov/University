@@ -18,10 +18,9 @@ namespace Univer.ViewModels
         private IRepository<Group> _Groups;
         private IRepository<Mark> _Marks;
 
-        private ObservableCollection<Group> _GroupsList;
-
         #region Properties
 
+        private ObservableCollection<Group> _GroupsList;
         public ObservableCollection<Group> GroupsList
         {
             get => _GroupsList;
@@ -117,6 +116,30 @@ namespace Univer.ViewModels
 
         #endregion
 
+        #region Command - add new group
+
+        public ICommand AddGroupCommand { get; }
+
+        private void OnAddGroupExecuted(object p)
+        {
+            Group group = new Group
+            {
+                Name = "АААА-00-00"
+            };
+
+            if (!Dialog.GroupEdit(group))
+                return;
+
+            _Groups.Create(group);
+            GroupsList.Add(group);
+
+            SelectedGroup = group;
+        }
+
+        private bool CanAddGroupExecute(object p) => true;
+
+        #endregion
+
         #region Command - remove group
 
         public ICommand RemoveGroupCommand { get; }
@@ -166,8 +189,10 @@ namespace Univer.ViewModels
 
         private void OnAddStudentExecuted(object p)
         {
-            Student student = new Student();
-            student.Group = SelectedGroup;
+            Student student = new Student
+            {
+                Group = SelectedGroup
+            };
 
             if (!Dialog.StudentEdit(student))
                 return;
@@ -216,7 +241,9 @@ namespace Univer.ViewModels
             #region Commands initialization
 
             GroupEditCommand = new RelayCommand(GroupEdit, CanGroupEditExecute);
+            AddGroupCommand = new RelayCommand(OnAddGroupExecuted, CanAddGroupExecute);
             RemoveGroupCommand = new RelayCommand(OnRemoveGroupCommandExecuted, CanRemoveGroupCommandExecute);
+
             StudentEditCommand = new RelayCommand(OnStudentEditExecuted, CanStudentEditExecute);
             AddStudentCommand = new RelayCommand(OnAddStudentExecuted, CanAddStudentExecute);
             RemoveStudentCommand = new RelayCommand(OnRemoveStudentCommandExecuted, CanRemoveStudentExecute);

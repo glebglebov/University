@@ -65,8 +65,7 @@
                         </Button>
                     </UniformGrid>
                     <Button Margin="0,10,0,0"
-                            Command=""
-                            CommandParameter="">
+                            Command="{Binding AddGroupCommand}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome Icon="Solid_PlusCircle"
