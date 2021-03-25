@@ -46,7 +46,7 @@
                             </Button.Content>
                             <Button.Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Padding" Value="9,6" />
+                                    <Setter Property="Padding" Value="9,5" />
                                     <Setter Property="Background" Value="White" />
                                     <Setter Property="BorderBrush" Value="#C8CEA1" />
                                     <Setter Property="BorderThickness" Value="1" />
@@ -66,14 +66,6 @@
     <Style TargetType="ComboBox">
         <Setter Property="Padding" Value="9,6" />
         <Setter Property="FontWeight" Value="Bold" />
-        <!--<Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <TextBox x:Name="PART_EditableTextBox"
-                             Text="{Binding Path=SelectedItem}" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>-->
     </Style>
 
     <Style TargetType="Button">

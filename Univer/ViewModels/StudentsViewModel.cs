@@ -46,6 +46,17 @@ namespace Univer.ViewModels
         public List<Mark> MarksList { get; set; }
         public List<Student> StudentsList { get; set; }
 
+        private ObservableCollection<Student> _SelectedGroupStudents;
+        public ObservableCollection<Student> SelectedGroupStudents
+        {
+            get => _SelectedGroupStudents;
+            private set
+            {
+                _SelectedGroupStudents = value;
+                OnProperyChanged();
+            }
+        }
+
         #region Property - Selected Group
 
         private Group _SelectedGroup;
@@ -55,6 +66,8 @@ namespace Univer.ViewModels
             set
             {
                 _SelectedGroup = value;
+                SelectedGroupStudents = new ObservableCollection<Student>(_SelectedGroup.Students);
+                SelectedGroupStudents.OrderBy(item => item.Surname);
                 OnProperyChanged();
             }
         }
@@ -137,13 +150,32 @@ namespace Univer.ViewModels
 
             if (student.Group != group)
             {
-                var tmp = SelectedGroup;
-                SelectedGroup = null;
-                SelectedGroup = tmp;
+                SelectedGroupStudents.Remove(student);
             }
         }
 
         private bool CanStudentEditExecute(object p) => p is Student;
+
+        #endregion
+
+        #region Command - add new student
+
+        public ICommand AddStudentCommand { get; }
+
+        private void OnAddStudentExecuted(object p)
+        {
+            Student student = new Student();
+
+            if (!Dialog.StudentEdit(student))
+                return;
+
+            _Students.Create(student);
+
+            if (student.Group == SelectedGroup)
+                SelectedGroupStudents.Add(student);
+        }
+
+        private bool CanAddStudentExecute(object p) => true;
 
         #endregion
 
@@ -164,6 +196,7 @@ namespace Univer.ViewModels
             GroupEditCommand = new RelayCommand(GroupEdit, CanGroupEditExecute);
             RemoveGroupCommand = new RelayCommand(OnRemoveGroupCommandExecuted, CanRemoveGroupCommandExecute);
             StudentEditCommand = new RelayCommand(OnStudentEditExecuted, CanStudentEditExecute);
+            AddStudentCommand = new RelayCommand(OnAddStudentExecuted, CanAddStudentExecute);
 
             #endregion
         }
