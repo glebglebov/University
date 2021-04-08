@@ -159,7 +159,9 @@
                             <TextBlock Text="Редактировать данные" />
                         </Button.Content>
                     </Button>
-                    <Button Margin="5,0,0,0">
+                    <Button Margin="5,0,0,0"
+                            Command="{Binding MarksEditCommand}"
+                            CommandParameter="{Binding SelectedStudent}">
                         <Button.Content>
                             <TextBlock Text="Редактировать оценки" />
                         </Button.Content>

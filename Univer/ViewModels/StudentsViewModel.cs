@@ -14,9 +14,10 @@ namespace Univer.ViewModels
 {
     class StudentsViewModel : BaseViewModel
     {
-        private IRepository<Student> _Students;
-        private IRepository<Group> _Groups;
-        private IRepository<Mark> _Marks;
+        private readonly IRepository<Student> _Students;
+        private readonly IRepository<Group> _Groups;
+        private readonly IRepository<Mark> _Marks;
+        private readonly IRepository<Subject> _Subjects;
 
         #region Properties
 
@@ -150,6 +151,7 @@ namespace Univer.ViewModels
 
             GroupsList.Remove(group);
             _Groups.Delete(group.Id);
+            SelectedGroup = null;
         }
 
         private bool CanRemoveGroupCommandExecute(object p) => p is Group;
@@ -223,14 +225,30 @@ namespace Univer.ViewModels
         private bool CanRemoveStudentExecute(object p) => p is Student;
 
         #endregion
+        #region Command - edit marks
+
+        public ICommand MarksEditCommand { get; }
+
+        private void OnMarksEditExecuted(object p)
+        {
+            var student = (Student)p;
+            if (!Dialog.MarksEdit(student.Marks))
+                return;
+        }
+
+        private bool CanMarksEditExecute(object p) => p is Student;
 
         #endregion
 
-        public StudentsViewModel(IRepository<Student> Students, IRepository<Group> Groups, IRepository<Mark> Marks)
+        #endregion
+
+        public StudentsViewModel(IRepository<Student> students, IRepository<Group> groups,
+            IRepository<Mark> marks, IRepository<Subject> subjects)
         {
-            _Students = Students;
-            _Groups = Groups;
-            _Marks = Marks;
+            _Students = students;
+            _Groups = groups;
+            _Marks = marks;
+            _Subjects = subjects;
 
             _GroupsList = new ObservableCollection<Group>(_Groups.GetList);
             StudentsList = _Students.GetList.ToList();
@@ -245,6 +263,8 @@ namespace Univer.ViewModels
             StudentEditCommand = new RelayCommand(OnStudentEditExecuted, CanStudentEditExecute);
             AddStudentCommand = new RelayCommand(OnAddStudentExecuted, CanAddStudentExecute);
             RemoveStudentCommand = new RelayCommand(OnRemoveStudentCommandExecuted, CanRemoveStudentExecute);
+
+            MarksEditCommand = new RelayCommand(OnMarksEditExecuted, CanMarksEditExecute);
 
             #endregion
         }

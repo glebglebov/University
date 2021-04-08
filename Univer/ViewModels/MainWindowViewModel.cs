@@ -25,8 +25,9 @@ namespace Univer.ViewModels
             _Students = new DbRepository<Student>(App.Db);
             _Groups = new DbRepository<Group>(App.Db);
             _Marks = new MarksRepository(App.Db);
+            _Subjects = new DbRepository<Subject>(App.Db);
 
-            ActiveViewModel = new StudentsViewModel(_Students, _Groups, _Marks);
+            ActiveViewModel = new StudentsViewModel(_Students, _Groups, _Marks, _Subjects);
         }
     }
 }
