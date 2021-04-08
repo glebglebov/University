@@ -50,9 +50,22 @@ namespace Univer.Models
             return true;
         }
 
-        public bool Create(Entity entity)
+        public static bool MarksEdit(ICollection<Mark> marks)
         {
-            throw new NotImplementedException();
+            var viewModel = new MarksEditWindowViewModel(marks);
+            var view = new MarksEditWindow
+            {
+                DataContext = viewModel
+            };
+
+            if (view.ShowDialog() != true)
+                return false;
+
+            marks = viewModel.Marks;
+
+            App.Db.SaveChanges();
+
+            return true;
         }
 
         public static bool ConfirmWarning(string Warning, string Caption)
